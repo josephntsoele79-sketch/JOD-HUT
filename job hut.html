@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>JobConnect</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f7fb;
+            color: #222;
+        }
+
+        header {
+            background: #173b70;
+            color: white;
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        nav button {
+            background: transparent;
+            border: none;
+            color: white;
+            margin-left: 15px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 70px 20px;
+            background: #dceaff;
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 25px;
+        }
+
+        .search {
+            max-width: 650px;
+            margin: auto;
+            display: flex;
+            gap: 10px;
+        }
+
+        .search input {
+            flex: 1;
+            padding: 15px;
+            border: 1px solid #aaa;
+            border-radius: 7px;
+            font-size: 16px;
+        }
+
+        .button {
+            background: #1769e0;
+            color: white;
+            border: none;
+            padding: 14px 22px;
+            border-radius: 7px;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            background: #0d4fab;
+        }
+
+        section {
+            padding: 45px 7%;
+        }
+
+        .title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns:
+                repeat(auto-fit, minmax(230px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .card h3 {
+            color: #173b70;
+            margin-bottom: 10px;
+        }
+
+        .jobs {
+            max-width: 900px;
+            margin: auto;
+        }
+
+        .job {
+            background: white;
+            padding: 22px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+        }
+
+        .job h3 {
+            color: #173b70;
+            margin-bottom: 8px;
+        }
+
+        .job p {
+            margin: 6px 0;
+        }
+
+        .form {
+            max-width: 550px;
+            margin: 30px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .form h2 {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .form input,
+        .form textarea,
+        .form select {
+            width: 100%;
+            padding: 13px;
+            margin-bottom: 15px;
+            border: 1px solid #bbb;
+            border-radius: 6px;
+        }
+
+        .form textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        footer {
+            background: #173b70;
+            color: white;
+            text-align: center;
+            padding: 25px;
+            margin-top: 30px;
+        }
+
+        @media (max-width: 600px) {
+            header {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .search {
+                flex-direction: column;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">
+        JobConnect
+    </div>
+
+    <nav>
+     
+    <button onclick="history.back()">⬅ Back</button>
+    <button onclick="showHome()">🏠 Home</button>
+    <button onclick="showJobs()">💼 Find Jobs</button>
+    <button onclick="showPostJob()">📢 Post a Job</button>
+    <button onclick="showLogin()">👤 Login</button>
+</nav>    
+
+</header>
+
+
+<!-- HOME -->
+
+<div id="home">
+
+    <div class="hero">
+
+        <h1>
+            Find Your Next Opportunity
+        </h1>
+
+        <p>
+            Connecting job seekers with employers.
+        </p>
+
+        <div class="search">
+
+            <input
+                id="searchInput"
+                type="text"
+                placeholder="Search for a job..."
+            >
+
+            <button
+                class="button"
+                onclick="searchJobs()"
+            >
+                Search
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <section>
+
+        <h2 class="title">
+            How JobConnect Works
+        </h2>
+
+        <div class="cards">
+
+            <div class="card">
+                <h3>Find Jobs</h3>
+                <p>
+                    Search for jobs that match
+                    your skills and interests.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>Apply</h3>
+                <p>
+                    Send your application
+                    directly to employers.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>Get Hired</h3>
+                <p>
+                    Employers can review
+                    applications and contact you.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+</div>
+
+
+<!-- JOBS -->
+
+<div id="jobs" style="display:none;">
+
+    <section>
+
+        <h2 class="title">
+            Available Jobs
+        </h2>
+
+        <div class="jobs">
+
+            <div class="job">
+
+                <h3>
+                    Junior Web Developer
+                </h3>
+
+                <p>
+                    <b>Company:</b>
+                    Tech Solutions
+                </p>
+
+                <p>
+                    <b>Location:</b>
+                    Maseru
+                </p>
+
+                <p>
+                    Help build and maintain websites.
+                </p>
+
+                <br>
+
+                <button
+                    class="button"
+                    onclick="applyForJob('Junior Web Developer')"
+                >
+                    Apply
+                </button>
+
+            </div>
+
+
+            <div class="job">
+
+                <h3>
+                    Graphic Designer
+                </h3>
+
+                <p>
+                    <b>Company:</b>
+                    Creative Studio
+                </p>
+
+                <p>
+                    <b>Location:</b>
+                    Maseru
+                </p>
+
+                <p>
+                    Create graphics and designs.
+                </p>
+
+                <br>
+
+                <button
+                    class="button"
+                    onclick="applyForJob('Graphic Designer')"
+                >
+                    Apply
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</div>
+
+
+<!-- POST JOB -->
+
+<div id="postJob" style="display:none;">
+
+    <div class="form">
+
+        <h2>
+            Post a Job
+        </h2>
+
+        <input
+            type="text"
+            id="company"
+            placeholder="Company name"
+        >
+
+        <input
+            type="text"
+            id="jobTitle"
+            placeholder="Job title"
+        >
+
+        <input
+            type="text"
+            id="location"
+            placeholder="Location"
+        >
+
+        <textarea
+            id="description"
+            placeholder="Describe the job"
+        ></textarea>
+
+        <button
+            class="button"
+            onclick="postJob()"
+        >
+            Post Job
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- LOGIN -->
+
+<div id="login" style="display:none;">
+
+    <div class="form">
+
+        <h2>
+            Login
+        </h2>
+
+        <input
+            type="email"
+            id="email"
+            placeholder="Email"
+        >
+
+        <input
+            type="password"
+            id="password"
+            placeholder="Password"
+        >
+
+        <button
+            class="button"
+            onclick="login()"
+        >
+            Login
+        </button>
+
+        <br><br>
+
+        <p>
+            Don't have an account?
+            <button onclick="showRegister()">
+                Register
+            </button>
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- REGISTER -->
+
+<div id="register" style="display:none;">
+
+    <div class="form">
+
+        <h2>
+            Create Account
+        </h2>
+
+        <input
+            type="text"
+            id="name"
+            placeholder="Full name"
+        >
+
+        <input
+            type="email"
+            id="registerEmail"
+            placeholder="Email"
+        >
+
+        <input
+            type="password"
+            id="registerPassword"
+            placeholder="Password"
+        >
+
+        <select id="role">
+
+            <option value="jobseeker">
+                Job Seeker
+            </option>
+
+            <option value="employer">
+                Employer
+            </option>
+
+        </select>
+
+        <button
+            class="button"
+            onclick="register()"
+        >
+            Create Account
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- APPLICATION -->
+
+<div id="application" style="display:none;">
+
+    <div class="form">
+
+        <h2>
+            Job Application
+        </h2>
+
+        <input
+            type="text"
+            id="applicantName"
+            placeholder="Your name"
+        >
+
+        <input
+            type="email"
+            id="applicantEmail"
+            placeholder="Your email"
+        >
+
+        <textarea
+            id="message"
+            placeholder="Tell the employer about yourself"
+        ></textarea>
+
+        <button
+            class="button"
+            onclick="submitApplication()"
+        >
+            Submit Application
+        </button>
+
+    </div>
+
+</div>
+
+
+<footer>
+
+    <p>
+        © 2026 JobConnect
+    </p>
+
+</footer>
+
+
+<script>
+
+function hideAll() {
+
+    document.getElementById("home").style.display = "none";
+
+    document.getElementById("jobs").style.display = "none";
+
+    document.getElementById("postJob").style.display = "none";
+
+    document.getElementById("login").style.display = "none";
+
+    document.getElementById("register").style.display = "none";
+
+    document.getElementById("application").style.display = "none";
+}
+
+
+function showHome() {
+
+    hideAll();
+
+    document.getElementById("home").style.display = "block";
+}
+
+
+function showJobs() {
+
+    hideAll();
+
+    document.getElementById("jobs").style.display = "block";
+}
+
+
+function showPostJob() {
+
+    hideAll();
+
+    document.getElementById("postJob").style.display = "block";
+}
+
+
+function showLogin() {
+
+    hideAll();
+
+    document.getElementById("login").style.display = "block";
+}
+
+
+function showRegister() {
+
+    hideAll();
+
+    document.getElementById("register").style.display = "block";
+}
+
+
+function applyForJob(job) {
+
+    hideAll();
+
+    document.getElementById("application").style.display = "block";
+
+    alert("Applying for: " + job);
+}
+
+
+function searchJobs() {
+
+    const search =
+        document.getElementById("searchInput").value;
+
+    if (search.trim() === "") {
+
+        alert("Type a job to search for.");
+
+        return;
+    }
+
+    showJobs();
+
+    alert(
+        "Searching for: " + search
+    );
+}
+
+
+function postJob() {
+
+    const company =
+        document.getElementById("company").value;
+
+    const title =
+        document.getElementById("jobTitle").value;
+
+    const location =
+        document.getElementById("location").value;
+
+    const description =
+        document.getElementById("description").value;
+
+    if (
+        company === "" ||
+        title === "" ||
+        location === "" ||
+        description === ""
+    ) {
+
+        alert("Please fill in every field.");
+
+        return;
+    }
+
+    alert(
+        "Job posted successfully!"
+    );
+}
+
+
+function login() {
+
+    const email =
+        document.getElementById("email").value;
+
+    const password =
+        document.getElementById("password").value;
+
+    if (
+        email === "" ||
+        password === ""
+    ) {
+
+        alert("Enter your email and password.");
+
+        return;
+    }
+
+    alert("Login successful!");
+
+    showHome();
+}
+
+
+function register() {
+
+    const name =
+        document.getElementById("name").value;
+
+    const email =
+        document.getElementById("registerEmail").value;
+
+    const password =
+        document.getElementById("registerPassword").value;
+
+    if (
+        name === "" ||
+        email === "" ||
+        password === ""
+    ) {
+
+        alert("Please fill in all fields.");
+
+        return;
+    }
+
+    alert(
+        "Account created successfully!"
+    );
+
+    showLogin();
+}
+
+
+function submitApplication() {
+
+    const name =
+        document.getElementById("applicantName").value;
+
+    const email =
+        document.getElementById("applicantEmail").value;
+
+    const message =
+        document.getElementById("message").value;
+
+    if (
+        name === "" ||
+        email === "" ||
+        message === ""
+    ) {
+
+        alert("Please complete the application.");
+
+        return;
+    }
+
+    alert(
+        "Application submitted successfully!"
+    );
+
+    showHome();
+}
+
+</script>
+
+</body>
+</html>
